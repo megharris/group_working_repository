@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+<html lang="en">
+{% extends 'sis/base.html' %}
+{% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Learn Fast</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    </head>
+    <body>
+    <style>
+        body {background-color: beige;}
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Welcome!</div>
+                    <div class="panel-body">
+                        Learn Fast For a Better Future!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <div class="row">-->
+<!--        <h2 style="padding-left: 15Px">Schedule Information</h2>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <table class="table table-striped table-bordered table-hover">-->
+<!--            <thead>-->
+<!--                <tr class="bg-info">-->
+<!--                    <th>Schedule</th>-->
+<!--                    <th>Course</th>-->
+<!--                    <th>Tutor</th>-->
+<!--                    <th>Room</th>-->
+<!--                    <th>Date</th>-->
+<!--                    <th>Time</th>-->
+<!--                    <th>Max Seat</th>-->
+<!--                    <th colspan="3">Actions</th>-->
+<!--                </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            {% for tutor in tutors %}-->
+<!--                <tr>-->
+<!--                    <td>{{ schedule.schedule_id }}</td>-->
+<!--                    <td>{{ schedule.schedule_course_name }}</td>-->
+<!--                    <td>{{ schedule.schedule_tutor_name }}</td>-->
+<!--                    <td>{{ schedule.schedule_room_number }}</td>-->
+<!--                    <td>{{ schedule.schedule_date }}</td>-->
+<!--                    <td>{{ schedule.schedule_time }}</td>-->
+<!--                    <td><a href="" class="btn btn-primary">Enroll</a></td>-->
+<!--                    <td><a href="" class="btn btn-primary">Summary</a></td>-->
+<!--                </tr>-->
+<!--            {% endfor %}-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+    {{message}}
+    <div class="row">
+    {% for object in object_list %}
+        <div class="col-sm-3">
+            <p>{{ object.schedule_course_name }}</p>
+            <p>{{ object.schedule_tutor_name}}</p>
+            <p>{{ object.schedule_date}}</p>
+            <p>{{ object.schedule_time}}</p>
+            <p>Price: ${{ object.price }}</p>
+            {% if object in current_order_schedules %}
+            <a href="{% url 'shopping_cart:order_summary' %}" class="btn btn-warning">Go to Cart</a>
+            {% else %}
+            <a href="{% url 'shopping_cart:add_to_cart' object.id %}" class="btn btn-warning">Add to Cart</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+    </body>
+    </html>
+{% endblock %}
